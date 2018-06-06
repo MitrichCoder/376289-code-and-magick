@@ -32,7 +32,7 @@ var getBarColor = function (ctx, player) {
   } else {
     ctx.fillStyle = 'hsla(235, ' + Math.random() * 100 + '%, 29%, 1)';
   }
-}
+};
 
 var drawBar = function (ctx, players, time, order, times) {
   var maxTime = getMaxElement(times);
@@ -48,7 +48,7 @@ var drawBar = function (ctx, players, time, order, times) {
 
   getBarColor(ctx, players);
   ctx.fillRect(BAR_XPOINT, BAR_YPOINT, BAR_WIDTH, BAR_HEIGHT);
-}
+};
 
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
