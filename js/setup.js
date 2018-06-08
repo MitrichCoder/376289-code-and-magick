@@ -10,35 +10,24 @@ var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', '�
 var WIZARD_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 
+// получение случайного элемент массива
+var getArr = function (arr) {
+  var arrElement = Math.floor(Math.random() * arr.length);
+  return arr[arrElement];
+};
+
+// случайное true или false
+var trueOrFalse = function () {
+  return (Math.floor(Math.random() * 2) === 0);
+};
+
 // генерация случайных имени и фамилии волшебника в случайном порядке: имя/фамилия или фамилия/имя
 var getWizardName = function () {
-  var name = WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)];
-  var surname = WIZARD_SURNAMES[Math.floor(Math.random() * WIZARD_SURNAMES.length)];
-  var nameOrder = Math.floor(Math.random() * 2);
-  var fullname;
-
-  if (nameOrder === 1) {
-    fullname = name + ' ' + surname;
-  } else {
-    fullname = surname + ' ' + name;
-  }
+  var name = getArr(WIZARD_NAMES);
+  var surname = getArr(WIZARD_SURNAMES);
+  var fullname = trueOrFalse() ? name + ' ' + surname : surname + ' ' + name;
 
   return fullname;
-  // console.log(nameOrder, fullname);
-};
-
-// генерация случайного цвета мантии волшебника
-var getWizardCoat = function () {
-  var coatColor = WIZARD_COLOR[Math.floor(Math.random() * WIZARD_COLOR.length)];
-  return coatColor;
-  // console.log(color);
-};
-
-// генерация случайного цвета глаз волшебника
-var getWizardEyes = function () {
-  var eyesColor = WIZARD_EYES[Math.floor(Math.random() * WIZARD_EYES.length)];
-  return eyesColor;
-  // console.log(eyesColor);
 };
 
 // создание массива волшебников
@@ -47,15 +36,14 @@ var wizards = [];
 for (var i = 0; i < WIZARDS_QUANTITY; i++) {
   var newWizard = {
     name: getWizardName(),
-    coatColor: getWizardCoat(),
-    eyesColor: getWizardEyes()
+    coatColor: getArr(WIZARD_COLOR),
+    eyesColor: getArr(WIZARD_EYES)
   };
 
   wizards.push(newWizard);
 }
 
-// console.log(wizards);
-
+// добавление персонажей на страницу
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 
