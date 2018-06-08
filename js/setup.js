@@ -14,7 +14,7 @@ var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 var getWizardName = function () {
   var name = WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)];
   var surname = WIZARD_SURNAMES[Math.floor(Math.random() * WIZARD_SURNAMES.length)];
-  var nameOrder = Math.floor(Math.random() * 2)
+  var nameOrder = Math.floor(Math.random() * 2);
   var fullname;
 
   if (nameOrder === 1) {
@@ -31,15 +31,15 @@ var getWizardName = function () {
 var getWizardCoat = function () {
   var coatColor = WIZARD_COLOR[Math.floor(Math.random() * WIZARD_COLOR.length)];
   return coatColor;
-  //console.log(color);
-}
+  // console.log(color);
+};
 
 // генерация случайного цвета глаз волшебника
 var getWizardEyes = function () {
   var eyesColor = WIZARD_EYES[Math.floor(Math.random() * WIZARD_EYES.length)];
   return eyesColor;
-  //console.log(eyesColor);
-}
+  // console.log(eyesColor);
+};
 
 // создание массива волшебников
 var wizards = [];
@@ -73,11 +73,11 @@ var renderWizard = function (wizard) {
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
   return wizardElement;
-}
+};
 
 var fragment = document.createDocumentFragment();
 
-for (var i = 0; i < wizards.length; i++) {
+for (i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
 }
 
