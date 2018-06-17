@@ -11,6 +11,10 @@ var WIZARD_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 16
 var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
+// keys
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
 // получение случайного элемент массива
 var getArr = function (arr) {
   var arrElement = Math.floor(Math.random() * arr.length);
@@ -75,9 +79,7 @@ similarListElement.appendChild(fragment);
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
 // setup popup
-var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
-var fieldInFocus = true;
+var fieldInFocus = false;
 
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
@@ -85,7 +87,7 @@ var setupClose = setup.querySelector('.setup-close');
 var setupUserName = setup.querySelector('.setup-user-name');
 
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE && !fieldInFocus) {
+  if (evt.keyCode === ESC_KEYCODE && fieldInFocus) {
     closePopup();
   }
 };
@@ -124,16 +126,14 @@ setupClose.addEventListener('keydown', function (evt) {
 
 // запрет ESC-key, если поле ввода имени в фокусе
 setupUserName.addEventListener('focus', function () {
-  fieldInFocus = true;
-});
-
-setupUserName.addEventListener('blur', function () {
   fieldInFocus = false;
 });
 
-// Изменение цвета мантии персонажа по нажатию
-var setupWizard = document.querySelector('.setup-wizard');
+setupUserName.addEventListener('blur', function () {
+  fieldInFocus = true;
+});
 
+// Изменение цвета мантии персонажа по нажатию
 var wizardCoat = document.querySelector('.wizard-coat');
 var inputCoatColor = document.getElementsByName('coat-color');
 
@@ -143,23 +143,27 @@ var inputEyesColor = document.getElementsByName('eyes-color');
 var setupFireball = document.querySelector('.setup-fireball-wrap');
 var inputFireball = document.getElementsByName('fireball-color');
 
-var fireballClickHendler = function () {
+var coatClickHandler = function () {
+  var coatParameter = getArr(WIZARD_COLOR);
+
+  wizardCoat.style.cssText = 'fill: ' + coatParameter;
+  inputCoatColor[0].value = coatParameter;
+};
+
+var eyesClickHandler = function () {
+  var eyesParameter = getArr(WIZARD_EYES);
+
+  wizardEyes.style.cssText = 'fill: ' + eyesParameter;
+  inputEyesColor[0].value = eyesParameter;
+};
+
+var fireballClickHandler = function () {
   var fireballParameter = getArr(FIREBALL_COLOR);
 
   setupFireball.style.cssText = 'background-color: ' + fireballParameter;
   inputFireball[0].value = fireballParameter;
 };
 
-var wizardClickHendler = function () {
-  var coatParameter = getArr(WIZARD_COLOR);
-  var eyesParameter = getArr(WIZARD_EYES);
-
-  wizardCoat.style.cssText = 'fill: ' + coatParameter;
-  inputCoatColor[0].value = coatParameter;
-
-  wizardEyes.style.cssText = 'fill: ' + eyesParameter;
-  inputEyesColor[0].value = eyesParameter;
-};
-
-setupWizard.addEventListener('click', wizardClickHendler);
-setupFireball.addEventListener('click', fireballClickHendler);
+wizardCoat.addEventListener('click', coatClickHandler);
+wizardEyes.addEventListener('click', eyesClickHandler);
+setupFireball.addEventListener('click', fireballClickHandler);
