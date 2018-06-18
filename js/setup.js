@@ -87,7 +87,8 @@ var setupClose = setup.querySelector('.setup-close');
 var setupUserName = setup.querySelector('.setup-user-name');
 
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE && fieldInFocus) {
+  // запрет ESC-key, если поле ввода имени в фокусе
+  if (evt.keyCode === ESC_KEYCODE && document.activeElement !== setupUserName) {
     closePopup();
   }
 };
@@ -122,15 +123,6 @@ setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
   }
-});
-
-// запрет ESC-key, если поле ввода имени в фокусе
-setupUserName.addEventListener('focus', function () {
-  fieldInFocus = false;
-});
-
-setupUserName.addEventListener('blur', function () {
-  fieldInFocus = true;
 });
 
 // Изменение цвета мантии персонажа по нажатию
