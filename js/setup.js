@@ -23,27 +23,23 @@
   // wizard parameters
   window.fireballSize = 22;
   window.wizardSpeed = 3;
-  window.wizardWidth = 70;
+  var wizardWidth = 70;
 
-  window.getFireballSpeed = function(left) {
+  window.getFireballSpeed = function (left) {
     return left ? 5 : 2;
-    console.log('ok1');
   };
 
-  window.getWizardHeight = function() {
+  window.getWizardHeight = function () {
     return wizardWidth * 1.337;
-    console.log('ok');
   };
 
-  window.getWizardX = function(width) {
+  window.getWizardX = function (width) {
     return (width / 2) - (wizardWidth / 2);
-    console.log('ok');
   };
 
-  window.getWizardY = function(height) {
-    //return height - (height / 3 * 2) - getWizardHeight();
+  window.getWizardY = function (height) {
+    // return height - (height / 3 * 2) - getWizardHeight();
     return height - (height / 3 + 20);
-    console.log('ok');
   };
 
   // генерация случайных имени и фамилии волшебника в случайном порядке: имя/фамилия или фамилия/имя
